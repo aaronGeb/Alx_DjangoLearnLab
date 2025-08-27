@@ -1,4 +1,5 @@
 from bookshelf.models import Book
 
-books = Book.objects.all()
-print(books)
+book = Book.objects.all()
+print(book)
+print(book.title, book.author, book.published_date)
