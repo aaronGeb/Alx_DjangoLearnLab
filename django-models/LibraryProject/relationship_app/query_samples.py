@@ -26,4 +26,4 @@ def get_librarian_for_library(library_name):
     Return the librarian assigned to a specific library.
     """
     library = Library.objects.get(name=library_name)
-    return library.librarian
+    return Librarian.objects.get(library=library)
