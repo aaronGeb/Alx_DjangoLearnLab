@@ -5,15 +5,24 @@
 from relationship_app.models import Author, Book, Library, Librarian
 
 
-def list_all_books_in_library():
+def get_books_by_author(author_name):
     """
-    Function that lists all the books in a library
+    Return all books written by a given author.
     """
+    return Book.objects.filter(author__name=author_name)
+
+
+def get_books_in_library(library_name):
     """
-    Function to list all libraries with their books
+    Return all books available in a specific library.
     """
-    libraries = Library.objects.all()
-    library_books = {}
-    for library in libraries:
-        library_books[library.name] = library.books.all()
-    return library_books
+    library = Library.objects.get(name=library_name)
+    return library.books.all()
+
+
+def get_librarian_for_library(library_name):
+    """
+    Return the librarian assigned to a specific library.
+    """
+    library = Library.objects.get(name=library_name)
+    return library.librarian
