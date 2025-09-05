@@ -9,8 +9,6 @@ from dajngo.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.contrib import messages
-
-
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.decorators import  permission_required
 
