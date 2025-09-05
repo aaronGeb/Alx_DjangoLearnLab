@@ -8,7 +8,7 @@ from django.views.generic import  DetailView
 def list_all_books_db(request):
     """function-based view to list all books in the database"""
     books = Book.objects.all()
-    return render(request, "./templates/list_books.html", {"books": books})
+    return render(request, "relationship_app/list_books.html", {"books": books})
 
 
 class ListBooksView(DetailView):
@@ -16,7 +16,7 @@ class ListBooksView(DetailView):
 
     model = Library
     context_object_name = "library"
-    template_name = "./templates/library_detail.html"
+    template_name = "relationship_app/library_detail.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
