@@ -11,7 +11,8 @@ from django.contrib.auth import logout
 from django.contrib import messages
 
 
-from django.contrib.auth.decorators import user_passes_test, permission_required
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import  permission_required
 
 
 # Create your views here.
