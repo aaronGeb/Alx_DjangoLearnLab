@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Book
 from .models import Library
@@ -9,6 +9,7 @@ from dajngo.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.contrib import messages
+
 
 # Create your views here.
 def list_books(request):
@@ -29,8 +30,10 @@ class LibraryDetailView(DetailView):
         context["books"] = self.objects.all()
         return context
 
+
 class LoginView(View):
-    template_name = 'relationship_app/login.html'
+    template_name = "relationship_app/login.html"
+
     def get(self, request):
         form = AuthenticationForm()
         return render(request, self.template_name, {"form": form})
@@ -46,9 +49,11 @@ class LoginView(View):
         else:
             messages.error(request, "Invalid username or password.")
             return render(request, self.template_name, {"form": form})
-        
+
+
 class RegisterView(View):
-    template_name = 'relationship_app/register.html'
+    template_name = "relationship_app/register.html"
+
     def get(self, request):
         form = UserCreationForm()
         return render(request, self.template_name, {"form": form})
@@ -64,8 +69,13 @@ class RegisterView(View):
             messages.error(request, "Please correct the error below.")
             return render(request, self.template_name, {"form": form})
 
+
 class LogoutView(View):
     def get(self, request):
         logout(request)
         messages.info(request, "You have successfully logged out.")
         return redirect("login")
+
+from .views.librarian_view import librarian_dashboard
+from .views.admin_view import admin_dashboard
+from .views.member_view import member_dashboard
