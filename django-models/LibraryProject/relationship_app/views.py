@@ -11,6 +11,8 @@ from django.contrib.auth import logout
 from django.contrib import messages
 
 
+from django.contrib.auth.decorators import user_passes_test
+
 # Create your views here.
 def list_books(request):
     """function-based view to list all books in the database"""
@@ -76,7 +78,29 @@ class LogoutView(View):
         messages.info(request, "You have successfully logged out.")
         return redirect("login")
 
+# --- Role check functions ---
+def is_admin(user):
+    return hasattr(user, 'userprofile') and user.userprofile.role == 'Admin'
 
-from .views.librarian_view import librarian_dashboard
-from .views.admin_view import admin_dashboard
-from .views.member_view import member_dashboard
+def is_librarian(user):
+    return hasattr(user, 'userprofile') and user.userprofile.role == 'Librarian'
+
+def is_member(user):
+    return hasattr(user, 'userprofile') and user.userprofile.role == 'Member'
+
+
+# --- Views with access control ---
+@user_passes_test(is_admin, login_url='login')
+def admin_dashboard(request):
+    return render(request, "relationship_app/admin_view.html", {"user": request.user})
+
+
+@user_passes_test(is_librarian, login_url='login')
+def librarian_dashboard(request):
+    return render(request, "relationship_app/librarian_view.html", {"user": request.user})
+
+
+@user_passes_test(is_member, login_url='login')
+def member_dashboard(request):
+    return render(request, "relationship_app/member_view.html", {"user": request.user})
+
