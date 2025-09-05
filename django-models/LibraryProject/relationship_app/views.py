@@ -76,6 +76,7 @@ class LogoutView(View):
         messages.info(request, "You have successfully logged out.")
         return redirect("login")
 
+
 from .views.librarian_view import librarian_dashboard
 from .views.admin_view import admin_dashboard
 from .views.member_view import member_dashboard
