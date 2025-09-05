@@ -112,16 +112,31 @@ def member_dashboard(request):
 
 
 # Views to Enforce Permissions
-@permission_required("relationship_app.can_add_book")
+@permission_required("relationship_app.can_add_book", raise_exception=True)
 def can_add_book_view(request):
-    return render(request, "relationship_app/can_add_book.html")
+    """View restricted to users with the 'can_add_book' permission."""
+    return render(
+        request,
+        "relationship_app/can_add_book.html",
+        {"title": "Add Book Permission", "user": request.user},
+    )
 
 
-@permission_required("relationship_app.can_change_book")
+@permission_required("relationship_app.can_change_book", raise_exception=True)
 def can_change_book_view(request):
-    return render(request, "relationship_app/can_change_book.html")
+    """View restricted to users with the 'can_change_book' permission."""
+    return render(
+        request,
+        "relationship_app/can_change_book.html",
+        {"title": "Change Book Permission", "user": request.user},
+    )
 
 
-@permission_required("relationship_app.can_delete_book")
+@permission_required("relationship_app.can_delete_book", raise_exception=True)
 def can_delete_book_view(request):
-    return render(request, "relationship_app/can_delete_book.html")
+    """View restricted to users with the 'can_delete_book' permission."""
+    return render(
+        request,
+        "relationship_app/can_delete_book.html",
+        {"title": "Delete Book Permission", "user": request.user},
+    )

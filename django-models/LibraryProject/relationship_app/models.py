@@ -16,6 +16,19 @@ class Book(models.Model):
     title = models.CharField()
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
 
+    # Extending Book Model with Custom Permissions
+    class Meta(models.Model):
+        permissions = [
+            ("can_add_book", "can add book"),
+            ("can_change_book", "can change book"),
+            ("can_delete_book", "can delete book"),
+        ]
+        permissions = models.CharField(max_length=50, choices="permissions")
+        meta = models.TextField()
+
+        def __str__(self):
+            return f"{self.user.username} - {self.permissions}"
+
 
 class Library(models.Model):
     name = models.CharField()

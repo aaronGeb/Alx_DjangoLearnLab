@@ -33,4 +33,7 @@ urlpatterns = [
     path("librarian_dashboard/", views.librarian_dashboard, name="librarian_dashboard"),
     path("admin_dashboard/", views.admin_dashboard, name="admin_dashboard"),
     path("member_dashboard/", views.member_dashboard, name="member_dashboard"),
+    path("add-permission/", views.can_add_book, name="can_add_book"),
+    path("change-permission/", views.can_change_book, name="can_change_book"),
+    path("delete-permission/", views.can_delete_book, name="can_delete_book"),
 ]
