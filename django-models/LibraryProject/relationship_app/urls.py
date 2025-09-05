@@ -9,9 +9,9 @@ urlpatterns = [
     path("all_books/", list_books, name="all_books"),
     path("class_listbooks/", LibraryDetailView.as_view(),
          name="all_books_in_library"),
-    path("login/", LoginView.as_view(), name="login"),
-    path("logout/", LogoutView.as_view(), name="logout"),
-    path("register/", RegisterView.as_view(), name="register"),
+    path("login/", LoginView.as_view(template_name="relationship_app/login.html"), name="login"),
+    path("logout/", LogoutView.as_view(template_name="relationship_app/logout.html"), name="logout"),
+    path("register/", RegisterView.as_view(template_name="relationship_app/register.html"), name="register"),
     path("", TemplateView.as_view(template_name="relationship_app/home.html"), name="home"),
   
 ]
