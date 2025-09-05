@@ -11,7 +11,8 @@ from django.contrib.auth import logout
 from django.contrib import messages
 
 
-from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import user_passes_test, permission_required
+
 
 # Create your views here.
 def list_books(request):
@@ -78,29 +79,49 @@ class LogoutView(View):
         messages.info(request, "You have successfully logged out.")
         return redirect("login")
 
+
 # --- Role check functions ---
 def is_admin(user):
-    return hasattr(user, 'userprofile') and user.userprofile.role == 'Admin'
+    return hasattr(user, "userprofile") and user.userprofile.role == "Admin"
+
 
 def is_librarian(user):
-    return hasattr(user, 'userprofile') and user.userprofile.role == 'Librarian'
+    return hasattr(user, "userprofile") and user.userprofile.role == "Librarian"
+
 
 def is_member(user):
-    return hasattr(user, 'userprofile') and user.userprofile.role == 'Member'
+    return hasattr(user, "userprofile") and user.userprofile.role == "Member"
 
 
 # --- Views with access control ---
-@user_passes_test(is_admin, login_url='login')
+@user_passes_test(is_admin, login_url="login")
 def admin_dashboard(request):
     return render(request, "relationship_app/admin_view.html", {"user": request.user})
 
 
-@user_passes_test(is_librarian, login_url='login')
+@user_passes_test(is_librarian, login_url="login")
 def librarian_dashboard(request):
-    return render(request, "relationship_app/librarian_view.html", {"user": request.user})
+    return render(
+        request, "relationship_app/librarian_view.html", {"user": request.user}
+    )
 
 
-@user_passes_test(is_member, login_url='login')
+@user_passes_test(is_member, login_url="login")
 def member_dashboard(request):
     return render(request, "relationship_app/member_view.html", {"user": request.user})
 
+
+# Views to Enforce Permissions
+@permission_required("relationship_app.can_add_book")
+def can_add_book_view(request):
+    return render(request, "relationship_app/can_add_book.html")
+
+
+@permission_required("relationship_app.can_change_book")
+def can_change_book_view(request):
+    return render(request, "relationship_app/can_change_book.html")
+
+
+@permission_required("relationship_app.can_delete_book")
+def can_delete_book_view(request):
+    return render(request, "relationship_app/can_delete_book.html")
