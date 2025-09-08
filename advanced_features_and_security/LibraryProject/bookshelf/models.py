@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import BaseUserManager
+from .manager import CustomUserManager
 
 
 # Create your models here.
@@ -15,6 +16,16 @@ class CustomUser(AbstractUser):
     profile_photo = models.ImageField(
         upload_to="profile_pictures/", blank=True, null=True
     )
+    objects = CustomUserManager()
+
+    class Meta:
+        permissions = [
+            ("can_view", "Can view"),
+            ("can_create", "Can create"),
+            ("can_edit", "Can edit"),
+            ("can_delete", "Can delete"),
+            
+        ]
 
 
 class CustomUserManager(BaseUserManager):
