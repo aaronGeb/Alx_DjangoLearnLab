@@ -25,8 +25,10 @@ SECRET_KEY = "django-insecure-0e&3wzu^ced84s1u+t7udoc#xt_#v%)g=czs!+lh(5z7i2aww#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", 'localhost']
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
+#Setting up User Model by specifying the model to use
+AUTH_USER_MODEL = "bookshelf.CustomUser"
 
 # Application definition
 
@@ -56,7 +58,7 @@ ROOT_URLCONF = "LibraryProject.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'templates/relationship_app'],
+        "DIRS": [BASE_DIR / "templates/relationship_app"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

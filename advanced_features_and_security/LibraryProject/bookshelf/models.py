@@ -45,4 +45,3 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(
             username, email, date_of_birth, password, **extra_fields
         )
-
