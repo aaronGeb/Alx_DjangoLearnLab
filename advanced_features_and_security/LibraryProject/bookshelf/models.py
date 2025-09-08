@@ -8,11 +8,7 @@ class Book(models.Model):
 
 
 
-class CustomUser(models.Model):
+class CustomUser(AbstractUser):
     date_of_birth = models.DateField()
     profile_photo = models.ImageField(upload_to='profile_pictures/')
-    
 
-
-    def __str__(self):
-        return self.username
