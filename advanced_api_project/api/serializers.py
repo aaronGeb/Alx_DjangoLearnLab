@@ -3,14 +3,6 @@ from datetime import datetime
 from .models import Book, Author
 
 
-class AuthorSerializer(serializers.ModelSerializer):
-    books = BookSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = Author
-        fields = ["id", "name", "books"]
-
-
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
@@ -22,3 +14,11 @@ class BookSerializer(serializers.ModelSerializer):
                 "Publication year cannot be in the future."
             )
         return value
+
+
+class AuthorSerializer(serializers.ModelSerializer):
+    books = BookSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Author
+        fields = ["name", "books"]
