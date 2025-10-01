@@ -84,7 +84,6 @@ DATABASES = {
         "PASSWORD": env.str("POSTGRES_PASSWORD"),
         "HOST": env.str("DB_HOST"),
         "PORT": env.int("DB_PORT"),
-       
     }
 }
 
